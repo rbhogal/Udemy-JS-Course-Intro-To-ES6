@@ -125,4 +125,9 @@ console.log(`This is ${firstName} ${lastName}. He was born in ${YEAR_OF_BIRTH}. 
 
 const N = `${firstName} ${lastName}`;
 console.log(N.startsWith('J'));
-console.log(N.startsWith('J'));
+console.log(N.endsWith('th'));
+console.log(N.includes('oh'));
+console.log(`${firstName} `.repeat(5));
+
+
+
