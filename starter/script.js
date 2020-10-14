@@ -134,7 +134,7 @@ console.log(`${firstName} `.repeat(5));
 //////////////////////////////////
 //// Lecture: Arrow Functions ////
 //////////////////////////////////
-
+/*
 const YEARS = [1990, 1965, 1982, 1937];
 
 // ES5
@@ -163,13 +163,13 @@ ages6 = YEARS.map((el, index) => {
     return `Age element ${index + 1}: ${AGE}.`
 });
 console.log(ages6);
-
+*/
 
 ////////////////////////////////////
 //// Lecture: Arrow Functions 2 ////
 ////////////////////////////////////
 
-
+/*
 // ES5
 var box5 = {
     color: 'green',
@@ -199,6 +199,7 @@ const BOX6 = {
         });
     }
 }
+*/
 
 //BOX6.clickMe();
 
@@ -220,7 +221,7 @@ BOX66.clickMe();
 
 
 
-
+/*
 function Person(name) {
     this.name = name;
 }
@@ -248,12 +249,13 @@ Person.prototype.myFriends6 = function(friends) {
 }
 
 new Person('Mike').myFriends5(friends);
-
+*/
 
 ////////////////////////////////
 //// Lecture: Destructuring ////
 ////////////////////////////////
 
+/*
 // ES5
 var john = ['John', 26];
 //var name = john[0];
@@ -279,3 +281,105 @@ console.log(firstName);
 console.log(lastName);
 
 
+function calcAgeRetirement(year) {
+    const age = new Date().getFullYear() - year;
+    return [age, 65 - age]; 
+}
+
+const [age2, retirement] = calcAgeRetirement(1990);
+console.log(age2);
+console.log(retirement);
+*/
+
+/////////////////////////////////
+//// Lecutre: Arrays
+/*
+const boxes = 
+document.querySelectorAll('.box');
+
+
+//ES5: transform to return array (using hack)
+
+var boxesArr5 = Array.prototype.slice.call(boxes);
+
+boxesArr5.forEach(function(cur) {
+    cur.style.backgroundColor = 'dodgerblue';
+});
+
+
+//ES6
+const boxesArr6 = Array.from(boxes); // from method transforms boxes from an nodelist to an array
+boxesArr6.forEach(cur => cur.style.backgroundColor = 'dodgerblue');
+*/
+/*
+// Shorter code
+Array.from(boxes).forEach(cur => cur.style.backgroundColor = 'dodgerblue');
+
+//ES5
+for(var i = 0; i <boxesArr5.length; i++) {
+
+    if(boxesArr5[i].className === 'box blue') {
+        continue;
+    } 
+
+    boxesArr5[i].textContent = 'I changed to blue!';
+}
+*/
+
+//ES6: for of loop
+/*
+for (const cur of boxesArr6) {
+    if (cur.className.includes('blue')) {
+        continue;
+    }
+    cur.textContent = 'I changed to blue!';
+
+}
+
+//ES5
+var ages = [12, 17, 8, 21, 14, 11];
+
+var full = ages.map(function(cur) {
+    return cur >= 18;
+});
+console.log(full);
+
+console.log(full.indexOf(true));
+console.log(ages[full.indexOf(true)]);
+
+//ES6: Find index method
+console.log(ages.findIndex(cur => cur >= 18)); // returns the index for the element the callback function returns true
+
+// retrive element and not just index
+console.log(ages.find(cur => cur >= 18));
+*/
+
+///////////////////////////////////////
+//// Lecture: Spread operator
+
+function addFourAges (a, b, c, d) {
+    return a + b + c + d;
+}
+
+var sum1 = addFourAges(18, 30, 12, 21);
+console.log(sum1);
+
+//ES5
+var ages = [18, 30, 12, 21];
+var sum2 = addFourAges.apply(null, ages); // takes array anc calls function with the elements
+console.log(sum2);
+
+//ES6
+const sum3 = addFourAges(...ages);
+console.log(sum3);
+
+const familySmith = ['John', 'Jane', 'Mark'];
+const familyMiller = ['Mary', 'Bob', 'Ann'];
+const bigFamily = [...familySmith, 'Lily', ...familyMiller];
+console.log(bigFamily);
+
+const h = document.querySelector('h1');
+const boxes = document.querySelectorAll('.box');
+const all = [h, ...boxes];
+
+Array.from(all).forEach(cur => cur.style.color = 'purple');
