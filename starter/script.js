@@ -291,8 +291,10 @@ console.log(age2);
 console.log(retirement);
 */
 
-/////////////////////////////////
-//// Lecutre: Arrays
+/////////////////////////
+//// Lecutre: Arrays ////
+/////////////////////////
+
 /*
 const boxes = 
 document.querySelectorAll('.box');
@@ -354,8 +356,10 @@ console.log(ages.findIndex(cur => cur >= 18)); // returns the index for the elem
 console.log(ages.find(cur => cur >= 18));
 */
 
-///////////////////////////////////////
-//// Lecture: Spread operator
+///////////////////////////////////
+//// Lecture: Spread operator ////
+//////////////////////////////////
+
 /*
 function addFourAges (a, b, c, d) {
     return a + b + c + d;
@@ -366,7 +370,7 @@ console.log(sum1);
 
 //ES5
 var ages = [18, 30, 12, 21];
-var sum2 = addFourAges.apply(null, ages); // takes array anc calls function with the elements
+var sum2 = addFourAges.apply(null, ages); // takes array and calls function with the elements
 console.log(sum2);
 
 //ES6
@@ -461,8 +465,9 @@ var john = new SmithPerson('John', 1990);
 var emily = new SmithPerson('Emily', 1983, 'Diaz', 'spanish');
 */
 
-///////////////////////////////
-//// Lecture: Maps
+///////////////////////
+//// Lecture: Maps ////
+///////////////////////
 
 /*
 const question = new Map();
@@ -504,9 +509,11 @@ console.log(question.get(ans === question.get('correct')));
 */
 
 
-//////////////////////////////
-//// Lecture: Classes
+//////////////////////////
+//// Lecture: Classes ////
+//////////////////////////
 
+/*
 //ES5
 var Person5 = function(name, yearOfBirth, job) {
     this.name = name; 
@@ -533,7 +540,198 @@ class Person6 {
         var age = new Date().getFullYear - this.yearOfBirth;
         console.log(age); 
     }
+
+    static greeting() {
+        console.log('Hey There!');
+    }
+
 }
 
 
 const john6 = new Person6('John', 1990, 'teacher');
+
+Person6.greeting();
+/*
+//ES5
+var Person5 = function(name, yearOfBirth, job) {
+    this.name = name; 
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+}
+
+Person5.prototype.calcAge = function() {
+    var age = new Date().getFullYear() - this.yearOfBirth;
+    console.log(age);
+}
+
+
+
+var Athlete5 = function(name, yearOfBirth, job, olympicGames, medals) {
+    Person5.call(this, name, yearOfBirth, job);
+    this.olympicGames = olympicGames;
+    this.medals = medals;
+}
+
+Athlete5.prototype = Object.create(Person5.prototype);
+
+Athlete5.prototype.wonMedal = function() {
+    this.medals++;
+    console.log(this.medals);
+}
+
+var johnAthlete5 = new Athlete5('John', 1990, 'swimmer', 3, 10);
+
+johnAthlete5.calcAge();
+johnAthlete5.wonMedal();
+*/
+
+/*
+//ES6
+class Person6 {
+    constructor (name, yearOfBirth, job) {
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
+
+    calcAge() {
+        var age = new Date().getFullYear() - this.yearOfBirth;
+        console.log(age); 
+    }
+}
+
+//sub-class
+
+class Athlete6 extends Person6 {
+    constructor(name, yearOfBirth, job, olympicGames, medals) {
+        super(name, yearOfBirth, job);
+        this.olympicGames = olympicGames;
+        this.medals = medals;
+    }
+
+    wonMedal() {
+        this.medals++;
+        console.log(this.medals);
+    }
+}
+
+const johnAthlete6 = new Athlete6('John', 1990, 'swimmer', 3, 10);
+
+johnAthlete6.wonMedal();
+johnAthlete6.calcAge();
+*/
+
+
+////////////////////////////
+//// CODING CHALLENGE 8 ////
+////////////////////////////
+
+// Create a town superclass with a constructor for name, build year
+
+class Town {
+    constructor(name, buildYear) {
+        this.name = name;
+        this.buildYear = buildYear;
+    }
+
+    calcAge() {
+        var age;
+        return age = new Date().getFullYear() - this.buildYear;
+    }
+
+    // Average park age = sum of all ages / number of parks
+    static averageParkAge() {
+        // // sum of all ages
+        // let park1 = park1.calcAge();
+        // let park2 = park2.calcAge();
+        // let park3 = park3.calcAge();
+
+        // let sum = park1 + park2 + park3;
+        // console.log(sum);
+
+        // create a parks array and push
+        let parksAges = []
+        for (let i = 0; i < parksAges.length; i++) {
+            parksAges.push(park[i].calcAge());
+        }
+
+        console.log(parksAges);
+
+        // get the position of each element in the parksAge array and sum it to get sum of all ages
+        for (let element of parksAges) {
+            //sum them
+            let sum = 0;
+            sum += element;
+        }
+
+        // number of parks
+
+        // average = sum of all ages / number of parks
+
+        /*
+        let parksArray = []
+        for (let i = 0; i < parksArray.length; i++) {
+            //
+        }
+        */
+
+    }
+}
+
+
+
+// Create a park sub-class parks with park area, current age of park, and no of trees
+class Park extends Town {
+    constructor(name, buildYear, parkArea, treesSum) {
+        super(name, buildYear);
+        this.parkArea = parkArea;
+        this.treesSum = treesSum;
+    }
+
+    // park class method: tree density method (no. of trees/park area)
+    calcTreeDensity() {
+        let treeDensity = this.treesSum / this.parkArea;
+        console.log(`${this.name} has a tree density of ${treeDensity} trees per square km.`);
+    }
+
+}
+
+const park0 = new Park('Green Park', 1975, 50, 1000);
+park0.calcAge();
+
+const park1 = new Park('National Park', 1864, 20000, 1000000);
+park1.calcAge();
+
+const park2 = new Park('Oak Park', 1999, 70000, 100000);
+park2.calcAge();
+
+// Create a street sub-class with length and size of street (tiny/small/normal/big/huge
+// default size = normal
+
+
+// Park Report Function
+const parkReport = () => {
+    console.log(`----PARKS REPORT----`)
+
+    // Average age of town's parks (sum of all ages/number of parks)
+    Town.averageParkAge();
+
+    // Tree density of each park
+    park0.calcTreeDensity();
+    park1.calcTreeDensity();
+    park2.calcTreeDensity();
+
+    // Name of park with 1000+ trees
+
+}
+
+// Streets Report Function
+
+    // Total and average size of town's streets
+
+
+    // Street classifications (tiny/small/normal/big/huge, normal = default)
+
+
+
+parkReport();
