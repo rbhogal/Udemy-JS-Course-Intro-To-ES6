@@ -291,9 +291,9 @@ console.log(age2);
 console.log(retirement);
 */
 
-/////////////////////////
-//// Lecutre: Arrays ////
-/////////////////////////
+////////////////////////////////////////////////////////////////////
+//// Lecutre: Arrays - For of Loop, Find Index and Find Methods ////
+////////////////////////////////////////////////////////////////////
 
 /*
 const boxes = 
@@ -436,8 +436,10 @@ function isFullAge6(limit, ...years) {
 
 isFullAge6(16, 1990, 1999, 1965, 2016, 1987);
 */
-////////////////////////////////////
-//// Lecture: Default Parameters
+
+/////////////////////////////////////
+//// Lecture: Default Parameters ////
+/////////////////////////////////////
 
 /*
 // ES5
@@ -640,29 +642,55 @@ class Town {
     }
 
     // Average park age = sum of all ages / number of parks
-    static averageParkAge() {
-        // // sum of all ages
-        // let park1 = park1.calcAge();
-        // let park2 = park2.calcAge();
-        // let park3 = park3.calcAge();
+    static calcAverageParkAge() {
+        //Declare variables
+        // save park ages into a variable
+        let park1Age = park1.calcAge();
+        let park2Age = park2.calcAge();
+        let park3Age = park3.calcAge();
+        let sumAges = 0; 
+        let numOfParks = 0; 
+        let averageParkAge; 
 
-        // let sum = park1 + park2 + park3;
-        // console.log(sum);
+        // SUM OF ALL AGES
+        // Create an ARRAY and add in ages and park 
+        let parkAges = [park1Age, park2Age, park3Age];
 
+        // iterate array to get the sum of the ages using a for of loop
+        for (let age of parkAges) {
+            sumAges += age;
+        }
+
+        // NUMBER OF PARKS
+        // get number of parks you can get the index of each element in the map and that's the number of parks you have
+        // you can't use find index on maps(objects) only on arrays! Use for of instead!
+        for (let park of parkAges.keys()) {
+            numOfParks += park;
+        }
+
+        // AVERAGE PARK AGE (sum of all ages / number of parks)
+        averageParkAge = sumAges / numOfParks; 
+
+        // Console log average age to Park Report
+        console.log(`Our ${numOfParks} parks have an average age of ${averageParkAge} years.`);
+    
+        /*
         // create a parks array and push
         let parksAges = []
-        for (let i = 0; i < parksAges.length; i++) {
-            parksAges.push(park[i].calcAge());
+    
+        for (let i = 0; i <= parksAges.length; i++) {
+            parksAges[i].push(park0.calcAge());
         }
 
         console.log(parksAges);
 
-        // get the position of each element in the parksAge array and sum it to get sum of all ages
+        // get the position of each element in the parksAge array and sum it to get sum of all ages find or find index method? 
         for (let element of parksAges) {
             //sum them
             let sum = 0;
             sum += element;
         }
+        */
 
         // number of parks
 
@@ -696,14 +724,14 @@ class Park extends Town {
 
 }
 
-const park0 = new Park('Green Park', 1975, 50, 1000);
-park0.calcAge();
+const park1 = new Park('Green Park', 1975, 50, 1000);
 
-const park1 = new Park('National Park', 1864, 20000, 1000000);
-park1.calcAge();
 
-const park2 = new Park('Oak Park', 1999, 70000, 100000);
-park2.calcAge();
+const park2 = new Park('National Park', 1864, 20000, 1000000);
+
+
+const park3 = new Park('Oak Park', 1999, 70000, 100000);
+
 
 // Create a street sub-class with length and size of street (tiny/small/normal/big/huge
 // default size = normal
@@ -714,12 +742,12 @@ const parkReport = () => {
     console.log(`----PARKS REPORT----`)
 
     // Average age of town's parks (sum of all ages/number of parks)
-    Town.averageParkAge();
+    Town.calcAverageParkAge();
 
     // Tree density of each park
-    park0.calcTreeDensity();
     park1.calcTreeDensity();
     park2.calcTreeDensity();
+    park3.calcTreeDensity();
 
     // Name of park with 1000+ trees
 
@@ -735,3 +763,16 @@ const parkReport = () => {
 
 
 parkReport();
+
+
+
+/*
+
+I get the values for each age of the park using the calcage method for each sub class. I need to take that value and store it into a data array. How?..
+
+park1.calcAge() returns a number
+park1.calcaAge() = a number 
+let age1 = park1.calcAge();
+
+now store age into an array (key-value like map maybe? park1, age1)
+*/
