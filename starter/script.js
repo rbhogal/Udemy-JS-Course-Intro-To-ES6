@@ -629,6 +629,23 @@ johnAthlete6.calcAge();
 //// CODING CHALLENGE 8 ////
 ////////////////////////////
 
+/*
+// Data Structure
+
+let data = {
+
+
+    street: {
+        name: [],
+        buildYear: [],
+        streetLength: [],
+        streetSize: []
+    }
+}
+
+let {name, buildYear, streetLength, streetSize} = data.street; 
+
+
 // Create a town superclass with a constructor for name, build year
 
 class Town {
@@ -691,27 +708,38 @@ class Town {
 
     static totalAndAvgStreetLength() {
 
-        // Need streets data structure
+        let totalStreets;
+        let sumLengths = 0;
+        let avgLength;
 
+        // Need streets data structure contents (street name, buildyear, length and size)
 
-
-
+        data.street.streetLength.push(street1.streetLength, street2.streetLength, street3.streetLength, street4.streetLength);
+        data.street.name.push(street1.name, street2.name, street3.name, street4.name);
+        data.street.buildYear.push(street1.buildYear, street2.buildYear, street3.buildYear, street4.buildYear);
+        data.street.streetSize.push(street1.streetSize, street2.streetSize, street3.streetSize, street4.streetSize);
+     
         // Total of the town's street
+        totalStreets = data.street.streetLength.length; 
 
-        
+        // sum of street lengths
+        for (let length of data.street.streetLength) {
+            sumLengths += length;
+        }
 
-
-
-
-        // Average length of town's streets
-
-
+        // Average length of town's streets (average = sum of sumLengths / totalStreets)
+        avgLength = sumLengths / totalStreets;
 
         
         // Console log total and average lenght of town's streets
+        console.log(`Our ${totalStreets} streets have a total length of ${sumLengths} km, with an average of ${avgLength} km.`)
+    }
 
-
-
+    // iterate over streets data object and console log
+    static streetSizeClassifications() {
+        
+            console.log(`${data.street.name}, built in ${data.street.buildYear}, is a ${data.street.streetSize} street.`)
+        
     }
 }
 
@@ -737,8 +765,8 @@ class Park extends Town {
 class Street extends Town {
     constructor(name, buildYear, length, size = 'normal') {
         super(name, buildYear);
-        this.length = length;
-        this.size = size;
+        this.streetLength = length;
+        this.streetSize = size;
     }
 }
 
@@ -765,7 +793,7 @@ const streetsReport = () => {
     console.log(`----STREETS REPORT----`);
 
     // Total and average size of town's streets
-
+    Town.totalAndAvgStreetLength();
 
     // Street classifications (tiny/small/normal/big/huge)
 
@@ -781,22 +809,110 @@ const park3 = new Park('Oak Park', 1999, 700, 500);
 // NEW STREETS //
 const street1 = new Street('Ocean Avenue', 1999, .5, 'big');
 const street2 = new Street('Evergreen Street', 2008, 0.3, 'small');
-const street3 = new Street('4th Street', 1, 2015);
+const street3 = new Street('4th Street', 2015, 1);
 const street4 = new Street('Sunset Boulevard', 1982, 2, 'huge');
    
-
 // RUN REPORTS
 parkReport();
 streetsReport();
 
 
-/*
-
-I get the values for each age of the park using the calcage method for each sub class. I need to take that value and store it into a data array. How?..
-
-park1.calcAge() returns a number
-park1.calcaAge() = a number 
-let age1 = park1.calcAge();
-
-now store age into an array (key-value like map maybe? park1, age1)
 */
+
+// JONA'S SOLUTION // 
+
+class Town {
+    constructor(name, buildYear) {
+        this.name = name;
+        this.buildYear = buildYear;
+    }
+}
+
+class Park extends Town {
+    constructor(name, buildYear, area, numTrees) {
+        super(name, buildYear);
+        this.area = area; // km2
+        this.numTrees = numTrees;
+    }
+
+    treeDensity() {
+        const density = this.numTrees / this.area;
+
+        console.log(`${this.name} has a tree density of ${density} trees per square km`);
+    }
+} 
+
+class Street extends Town {
+    constructor(name, buildYear, length, size = '3') {
+        super(name, buildYear)
+        this.length = length;
+        this.size = size;
+    }
+
+    classifyStreet() {
+        const classification = new Map();
+        classification.set(1, 'tiny');
+        classification.set(2, 'small');
+        classification.set(3, 'normal');
+        classification.set(4, 'small');
+        classification.set(5, 'huge');
+        console.log(`${this.name}, built in ${this.buildYear}, is a ${classification.get(this.size)} street.`);
+    }
+
+}
+
+const allParks = [
+    new Park('Green Park', 1987, 0.2, 215),
+    new Park('National Park', 1864, 2.9, 3541),
+    new Park('Oak Park', 1953, 0.4, 949)
+] 
+
+const allStreets = [
+    new Street('Ocean Avenue', 1999, 1.1, 4),
+    new Street('Evergreen Street', 2008, 2.7, 2),
+    new Street('4th Street', 2015, 0.8),
+    new Street('Sunset Boulevard', 1982, 2.5, 5),
+
+]
+
+function calc(arr) {
+
+    const sum = arr.reduce((prev, cur, index) => prev + cur, 0);
+
+    return [sum, sum / arr.length];
+
+}
+
+function reportParks(p) {
+
+    console.log('-----PARKS REPORT-----')
+
+    // Density
+    p.forEach(el => el.treeDensity());
+
+    // Average Agec
+    const ages = 
+    const [totalAge, avgAge] = calc(ages);
+
+
+
+    // Which park has more than 1000 trees
+
+
+
+}
+
+function reportStreets(s) {
+
+
+}
+
+
+reportParks(allParks);
+reportStreets(allStreets);
+
+    
+
+    
+
+
