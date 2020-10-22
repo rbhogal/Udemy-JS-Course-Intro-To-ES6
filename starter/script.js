@@ -641,7 +641,6 @@ class Town {
         return age = new Date().getFullYear() - this.buildYear;
     }
 
-    // Average park age = sum of all ages / number of parks
     static calcAverageParkAge() {
         //Declare variables
         // save park ages into a variable
@@ -673,35 +672,22 @@ class Town {
 
         // Console log average age to Park Report
         console.log(`Our ${numOfParks} parks have an average age of ${averageParkAge} years.`);
-    
-        /*
-        // create a parks array and push
-        let parksAges = []
-    
-        for (let i = 0; i <= parksAges.length; i++) {
-            parksAges[i].push(park0.calcAge());
+    }
+
+    static parkTrees1000() {
+
+        // Create a data structure for park names and associated no. of trees use a map?
+        let parks = new Map()
+        parks.set('Green Park', park1.treesSum);
+        parks.set('National Park', park2.treesSum);
+        parks.set('Oak Park', park3.treesSum);
+
+        // for of loop with an if 
+        for (let [park, treesSum] of parks) {
+            if (treesSum >= 1000) {
+                console.log(`${park} has more than 1000 trees.`);
+            }
         }
-
-        console.log(parksAges);
-
-        // get the position of each element in the parksAge array and sum it to get sum of all ages find or find index method? 
-        for (let element of parksAges) {
-            //sum them
-            let sum = 0;
-            sum += element;
-        }
-        */
-
-        // number of parks
-
-        // average = sum of all ages / number of parks
-
-        /*
-        let parksArray = []
-        for (let i = 0; i < parksArray.length; i++) {
-            //
-        }
-        */
 
     }
 }
@@ -724,13 +710,9 @@ class Park extends Town {
 
 }
 
-const park1 = new Park('Green Park', 1975, 50, 1000);
-
-
+const park1 = new Park('Green Park', 1975, 50, 240);
 const park2 = new Park('National Park', 1864, 20000, 1000000);
-
-
-const park3 = new Park('Oak Park', 1999, 70000, 100000);
+const park3 = new Park('Oak Park', 1999, 700, 500);
 
 
 // Create a street sub-class with length and size of street (tiny/small/normal/big/huge
@@ -750,6 +732,7 @@ const parkReport = () => {
     park3.calcTreeDensity();
 
     // Name of park with 1000+ trees
+    Town.parkTrees1000();
 
 }
 
