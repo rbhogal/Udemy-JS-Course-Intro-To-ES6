@@ -455,6 +455,7 @@ function SmithPerson (firstName, yearOfBirth, lastName, nationality) {
 }
 */
 
+// ES6
 /*
 function SmithPerson(firstName, yearOfBirth, lastName = 'Smith', nationality = 'american') {
     this.firstName = firstName;
@@ -648,7 +649,7 @@ class Town {
         let park2Age = park2.calcAge();
         let park3Age = park3.calcAge();
         let sumAges = 0; 
-        let numOfParks = 0; 
+        let numOfParks; 
         let averageParkAge; 
 
         // SUM OF ALL AGES
@@ -663,9 +664,7 @@ class Town {
         // NUMBER OF PARKS
         // get number of parks you can get the index of each element in the map and that's the number of parks you have
         // you can't use find index on maps(objects) only on arrays! Use for of instead!
-        for (let park of parkAges.keys()) {
-            numOfParks += park;
-        }
+        numOfParks = parkAges.length;
 
         // AVERAGE PARK AGE (sum of all ages / number of parks)
         averageParkAge = sumAges / numOfParks; 
@@ -688,13 +687,37 @@ class Town {
                 console.log(`${park} has more than 1000 trees.`);
             }
         }
+    }
+
+    static totalAndAvgStreetLength() {
+
+        // Need streets data structure
+
+
+
+
+        // Total of the town's street
+
+        
+
+
+
+
+        // Average length of town's streets
+
+
+
+        
+        // Console log total and average lenght of town's streets
+
+
 
     }
 }
 
 
 
-// Create a park sub-class parks with park area, current age of park, and no of trees
+// PARK SUB-CLASS: Create a park sub-class parks with park area, current age of park, and no of trees
 class Park extends Town {
     constructor(name, buildYear, parkArea, treesSum) {
         super(name, buildYear);
@@ -710,16 +733,17 @@ class Park extends Town {
 
 }
 
-const park1 = new Park('Green Park', 1975, 50, 240);
-const park2 = new Park('National Park', 1864, 20000, 1000000);
-const park3 = new Park('Oak Park', 1999, 700, 500);
+// STREET SUB-CLASS: create street sub-class with a name, build year, and also length of the street, size classification tiny/small/normal (default)/big/huge
+class Street extends Town {
+    constructor(name, buildYear, length, size = 'normal') {
+        super(name, buildYear);
+        this.length = length;
+        this.size = size;
+    }
+}
 
 
-// Create a street sub-class with length and size of street (tiny/small/normal/big/huge
-// default size = normal
-
-
-// Park Report Function
+// PARKS REPORT 
 const parkReport = () => {
     console.log(`----PARKS REPORT----`)
 
@@ -736,17 +760,34 @@ const parkReport = () => {
 
 }
 
-// Streets Report Function
+// STREETS REPORT
+const streetsReport = () => {
+    console.log(`----STREETS REPORT----`);
 
     // Total and average size of town's streets
 
 
-    // Street classifications (tiny/small/normal/big/huge, normal = default)
+    // Street classifications (tiny/small/normal/big/huge)
 
 
+}
 
+// NEW PARKS //
+const park1 = new Park('Green Park', 1975, 50, 240);
+const park2 = new Park('National Park', 1864, 20000, 1000000);
+const park3 = new Park('Oak Park', 1999, 700, 500);
+
+
+// NEW STREETS //
+const street1 = new Street('Ocean Avenue', 1999, .5, 'big');
+const street2 = new Street('Evergreen Street', 2008, 0.3, 'small');
+const street3 = new Street('4th Street', 1, 2015);
+const street4 = new Street('Sunset Boulevard', 1982, 2, 'huge');
+   
+
+// RUN REPORTS
 parkReport();
-
+streetsReport();
 
 
 /*
