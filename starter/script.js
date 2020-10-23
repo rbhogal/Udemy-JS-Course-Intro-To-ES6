@@ -350,7 +350,7 @@ console.log(full.indexOf(true));
 console.log(ages[full.indexOf(true)]);
 
 //ES6: Find index method
-console.log(ages.findIndex(cur => cur >= 18)); // returns the index for the element the callback function returns true
+console.log(ages.findIndex(cur => cur >= 18)); // returns the index for the element the callback function returns true. Meaning it only returns the index
 
 // retrive element and not just index
 console.log(ages.find(cur => cur >= 18));
@@ -843,7 +843,7 @@ class Park extends Town {
 } 
 
 class Street extends Town {
-    constructor(name, buildYear, length, size = '3') {
+    constructor(name, buildYear, length, size = 3) {
         super(name, buildYear)
         this.length = length;
         this.size = size;
@@ -854,7 +854,7 @@ class Street extends Town {
         classification.set(1, 'tiny');
         classification.set(2, 'small');
         classification.set(3, 'normal');
-        classification.set(4, 'small');
+        classification.set(4, 'big');
         classification.set(5, 'huge');
         console.log(`${this.name}, built in ${this.buildYear}, is a ${classification.get(this.size)} street.`);
     }
@@ -879,7 +879,7 @@ function calc(arr) {
 
     const sum = arr.reduce((prev, cur, index) => prev + cur, 0);
 
-    return [sum, sum / arr.length];
+    return [sum, sum / arr.length]; // return sum and average
 
 }
 
@@ -890,21 +890,35 @@ function reportParks(p) {
     // Density
     p.forEach(el => el.treeDensity());
 
-    // Average Agec
-    const ages = 
-    const [totalAge, avgAge] = calc(ages);
-
+    // Average Age
+    const ages = p.map(el => new Date().getFullYear() - el.buildYear); // .map performs a funct on each el in the parks array and returns a new one. array full of ages
+    const [totalAge, avgAge] = calc(ages); // calculates to give you total ages and average age of each park
+    console.log(`Our ${p.length} parks have an average of ${avgAge} years.`); // p.length gives you number of parks. and avg age. 
 
 
     // Which park has more than 1000 trees
+    const i = p.map(el => el.numTrees).findIndex(el => el >= 1000); //you can chain the 2 method map and findIndex 
+    
+    /* explanation of above
+    the map above creates a new array and stores the numTrees into it. Now we have an array the number of trees.
+    Then we can use the findIndex method
+    */
 
-
-
+    console.log(`${p[i].name} has more than 1000 trees.`)
 }
+
 
 function reportStreets(s) {
 
+    console.log('-----STREETS REPORT-----')
 
+    // Total and average length of the town's streets
+    const [totalLength, avgLength] = calc(s.map(el => el.length));
+
+    console.log(`Our ${s.length} streets have a total length of ${totalLength} km, with an average of ${avgLength} km.`); 
+
+    // Classify sizes
+    s.forEach(el => el.classifyStreet());
 }
 
 
@@ -914,5 +928,3 @@ reportStreets(allStreets);
     
 
     
-
-
